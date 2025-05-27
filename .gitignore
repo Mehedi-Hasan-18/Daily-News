@@ -1,0 +1,4 @@
+.env
+.news
+db.sqlite3
+__pycache__

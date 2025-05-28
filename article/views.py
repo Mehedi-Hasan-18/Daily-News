@@ -5,11 +5,16 @@ from .serializer import ArticleSerializer,CategorySerializer,AuthorSerializer,Ar
 from .permission import IsAdminOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend,SearchFilter]
+    filterset_fields = ['category_id']
+    search_fields = ['headline','body','category__name','author__name']
     
     @swagger_auto_schema(
         operation_summary="List all articles",
@@ -62,6 +67,8 @@ class ArticleViewSet(ModelViewSet):
 class ArticleImageViewSet(ModelViewSet):
     serializer_class = ArticleImageSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['article_id']
     
     def get_queryset(self):
         return ArticleImage.objects.filter(article_id = self.kwargs.get('article_pk'))

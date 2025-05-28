@@ -1,8 +1,3 @@
-Here is a professional and well-structured `README.md` file for your **Daily-News** project:
-
----
-
-````markdown
 # 📰 Daily-News API
 
 **Daily-News** is a RESTful API built with Django REST Framework for managing and publishing articles, handling user ratings, author and category management, and image uploads using Cloudinary. It features token-based authentication, permission handling, and automatically generated Swagger documentation.

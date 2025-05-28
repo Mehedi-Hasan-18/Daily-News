@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'daily_news.wsgi.application'
+WSGI_APPLICATION = 'daily_news.wsgi.app'
 
 INTERNAL_IPS = [
     # ...

@@ -5,6 +5,7 @@ from article.views import ArticleViewSet,ArticleImageViewSet,RatingsViewSet,Cate
 router = routers.DefaultRouter()
 router.register('articles',ArticleViewSet,basename='articles')
 router.register('categories',CategoryViewSet)
+router.register('authors',AuthorViewSet)
 
 article_router = routers.NestedSimpleRouter(router,'articles', lookup = 'article')
 article_router.register('images',ArticleImageViewSet,basename='article-images')

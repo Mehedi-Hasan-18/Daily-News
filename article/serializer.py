@@ -19,12 +19,13 @@ class ArticleImageSerializer(serializers.ModelSerializer):
         fields = ['id','image']
 
 class ArticleSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-    author = AuthorSerializer()
+    # category = CategorySerializer()
+    # author = AuthorSerializer()
     images = ArticleImageSerializer(many=True,read_only = True)
     class Meta:
         model = Article
         fields = ['id','headline','images','category','author','publishing_date','created_at','updated_at']
+        read_only_fields = ['created_at','updated_at']
     
 class SimpleUserSerializer(serializers.ModelSerializer):
     name = serializers.SerializerMethodField(method_name='get_user_full_name')

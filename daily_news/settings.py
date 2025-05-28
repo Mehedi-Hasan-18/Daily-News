@@ -126,16 +126,13 @@ MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
-try:
-    cloudinary.config(
-        cloud_name=config('cloud_name'),
-        api_key=config('api_key'),
-        api_secret=config('api_secret'),
-        secure=True
-    )
-    print("\nCloudinary configured successfully!")
-except Exception as e:
-    print("\nFailed to configure Cloudinary:", str(e))
+
+cloudinary.config(
+    cloud_name=config('cloud_name'),
+    api_key=config('api_key'),
+    api_secret=config('api_secret'),
+    secure=True
+)
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
@@ -162,6 +159,17 @@ DJOSER = {
         'user_create':'users.serializer.UserCreateSerializer',
         'current_user':'users.serializer.UserSerializer',
     },
+}
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header',
+            'description':'Enter Your Access Token `JWT <YOUR TOKEN>`'
+      }
+   }
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

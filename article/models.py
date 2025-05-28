@@ -23,7 +23,7 @@ class Article(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE, related_name='article')
     author = models.ForeignKey(Author,on_delete=models.CASCADE,related_name='article')
     publishing_date = models.DateTimeField()
-    created_at = models.DateTimeField(auto_created=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
     def __str__(self):
@@ -37,3 +37,6 @@ class Ratings(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,related_name='ratings')
     article = models.ForeignKey(Article,on_delete=models.CASCADE,related_name='ratings')
     value = models.PositiveIntegerField(validators=[MaxValueValidator(4),MinValueValidator(0)])
+    
+    def __str__(self):
+        return f'Review By {self.user.first_name} on {self.article.headline}'

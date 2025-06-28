@@ -20,11 +20,11 @@ class ArticleImageSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     # category = CategorySerializer()
-    # author = AuthorSerializer()
+    author = AuthorSerializer()
     images = ArticleImageSerializer(many=True,read_only = True)
     class Meta:
         model = Article
-        fields = ['id','headline','images','category','author','publishing_date','created_at','updated_at']
+        fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
         read_only_fields = ['created_at','updated_at']
     
 class SimpleUserSerializer(serializers.ModelSerializer):

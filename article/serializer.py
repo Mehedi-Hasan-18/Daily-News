@@ -19,7 +19,7 @@ class ArticleImageSerializer(serializers.ModelSerializer):
         fields = ['id','image']
 
 class ArticleSerializer(serializers.ModelSerializer):
-    # category = CategorySerializer()
+    category = CategorySerializer()
     author = AuthorSerializer()
     images = ArticleImageSerializer(many=True,read_only = True)
     class Meta:

@@ -1,12 +1,172 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .models import Article,Category,Author,ArticleImage,Ratings
-from .serializer import ArticleSerializer,CategorySerializer,AuthorSerializer,ArticleImageSerializer,SimpleUserSerializer,RatingSerializer
+from .models import Article,Category,Author,ArticleImage,Ratings,MustReadArticle,DontMissArticle,PopularArticle,MustReadArticleImage,PopularArticleImage,DontMissArticleImage
+from .serializer import ArticleSerializer,CategorySerializer,AuthorSerializer,ArticleImageSerializer,SimpleUserSerializer,RatingSerializer,MustReadArticleSerializer,DontMissArticleSerializer,PopularArticleSerializer,MustReadArticleImageSerializer,DontMissArticleImageSerializer,PopularArticleImageSerializer
 from .permission import IsAdminOrReadOnly
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
+
+# --------------------------ArticleViewSet---------------------
+class MustReadArticleViewSet(ModelViewSet):
+    queryset = MustReadArticle.objects.all()
+    serializer_class = MustReadArticleSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    
+    @swagger_auto_schema(
+        operation_summary="List Must Read articles",
+        operation_description="Retrieve a list of all Must Read articles with author and category information.",
+        tags=["Must Read Articles"]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve a Must Read article",
+        operation_description="Get detailed information about a specific Must Read article by ID.",
+        tags=["Must Read Articles"]
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Create a Must Read article",
+        operation_description="Create a new Must Read article. Admin access only.",
+        tags=["Must Read Articles"]
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update a Must Read article",
+        operation_description="Update the entire Must Read article object. Admin only.",
+        tags=["Must Read Articles"]
+    )
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Partially update a Must Read article",
+        operation_description="Update one or more fields of a Must Read article. Admin only.",
+        tags=["Must Read Articles"]
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete a Must Read article",
+        operation_description="Delete a Must Read article by ID. Admin only.",
+        tags=["Must Read Articles"]
+    )
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
+
+class DontMissArticleViewSet(ModelViewSet):
+    queryset = DontMissArticle.objects.all()
+    serializer_class = DontMissArticleSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    
+    @swagger_auto_schema(
+        operation_summary="List Don't Miss articles",
+        operation_description="Retrieve a list of all Don't Miss articles with author and category information.",
+        tags=["Don't Miss Articles"]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve a Don't Miss article",
+        operation_description="Get detailed information about a specific Don't Miss article by ID.",
+        tags=["Don't Miss Articles"]
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Create a Don't Miss article",
+        operation_description="Create a new Don't Miss article. Admin access only.",
+        tags=["Don't Miss Articles"]
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update a Don't Miss article",
+        operation_description="Update the entire Don't Miss article object. Admin only.",
+        tags=["Don't Miss Articles"]
+    )
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Partially update a Don't Miss article",
+        operation_description="Update one or more fields of a Don't Miss article. Admin only.",
+        tags=["Don't Miss Articles"]
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete a Don't Miss article",
+        operation_description="Delete a Don't Miss article by ID. Admin only.",
+        tags=["Don't Miss Articles"]
+    )
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
+
+class PopularArticleViewSet(ModelViewSet):
+    queryset = PopularArticle.objects.all()
+    serializer_class = PopularArticleSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    
+    @swagger_auto_schema(
+        operation_summary="List Popular articles",
+        operation_description="Retrieve a list of all Popular articles with author and category information.",
+        tags=["Popular Articles"]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve a Popular article",
+        operation_description="Get detailed information about a specific Popular article by ID.",
+        tags=["Popular Articles"]
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Create a Popular article",
+        operation_description="Create a new Popular article. Admin access only.",
+        tags=["Popular Articles"]
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update a Popular article",
+        operation_description="Update the entire Popular article object. Admin only.",
+        tags=["Popular Articles"]
+    )
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Partially update a Popular article",
+        operation_description="Update one or more fields of a Popular article. Admin only.",
+        tags=["Popular Articles"]
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete a Popular article",
+        operation_description="Delete a Popular article by ID. Admin only.",
+        tags=["Popular Articles"]
+    )
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
 
 class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
@@ -60,6 +220,183 @@ class ArticleViewSet(ModelViewSet):
         operation_summary="Delete an article",
         operation_description="Delete an article by ID. Admin only.",
         tags=["articles"]
+    )
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
+    
+# ---------------ImageViewSet--------------------
+
+    
+class MustReadArticleImageViewSet(ModelViewSet):
+    serializer_class = MustReadArticleImageSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    
+    def get_queryset(self):
+        return MustReadArticleImage.objects.filter(article_id=self.kwargs.get('article_pk'))
+    
+    def perform_create(self, serializer):
+        serializer.save(article_id=self.kwargs.get('article_pk'))
+    
+    @swagger_auto_schema(
+        operation_summary="List Must Read article images",
+        operation_description="Retrieve all images attached to a specific Must Read article.",
+        tags=["Must Read Article Images"]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve a Must Read article image",
+        operation_description="Get a single Must Read article image by ID.",
+        tags=["Must Read Article Images"]
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Create a Must Read article image",
+        operation_description="Upload a new image to a specific Must Read article. Admin only.",
+        tags=["Must Read Article Images"]
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update a Must Read article image",
+        operation_description="Replace an image of the Must Read article. Admin only.",
+        tags=["Must Read Article Images"]
+    )
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Partially update a Must Read article image",
+        operation_description="Update image metadata for Must Read article. Admin only.",
+        tags=["Must Read Article Images"]
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete a Must Read article image",
+        operation_description="Remove an image from the Must Read article. Admin only.",
+        tags=["Must Read Article Images"]
+    )
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
+
+class DontMissArticleImageViewSet(ModelViewSet):
+    serializer_class = DontMissArticleImageSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    
+    def get_queryset(self):
+        return DontMissArticleImage.objects.filter(article_id=self.kwargs.get('article_pk'))
+    
+    def perform_create(self, serializer):
+        serializer.save(article_id=self.kwargs.get('article_pk'))
+    
+    @swagger_auto_schema(
+        operation_summary="List Don't Miss article images",
+        operation_description="Retrieve all images attached to a specific Don't Miss article.",
+        tags=["Don't Miss Article Images"]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve a Don't Miss article image",
+        operation_description="Get a single Don't Miss article image by ID.",
+        tags=["Don't Miss Article Images"]
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Create a Don't Miss article image",
+        operation_description="Upload a new image to a specific Don't Miss article. Admin only.",
+        tags=["Don't Miss Article Images"]
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update a Don't Miss article image",
+        operation_description="Replace an image of the Don't Miss article. Admin only.",
+        tags=["Don't Miss Article Images"]
+    )
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Partially update a Don't Miss article image",
+        operation_description="Update image metadata for Don't Miss article. Admin only.",
+        tags=["Don't Miss Article Images"]
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete a Don't Miss article image",
+        operation_description="Remove an image from the Don't Miss article. Admin only.",
+        tags=["Don't Miss Article Images"]
+    )
+    def destroy(self, request, *args, **kwargs):
+        return super().destroy(request, *args, **kwargs)
+
+class PopularArticleImageViewSet(ModelViewSet):
+    serializer_class = PopularArticleImageSerializer
+    permission_classes = [IsAdminOrReadOnly]
+    
+    def get_queryset(self):
+        return PopularArticleImage.objects.filter(article_id=self.kwargs.get('article_pk'))
+    
+    def perform_create(self, serializer):
+        serializer.save(article_id=self.kwargs.get('article_pk'))
+    
+    @swagger_auto_schema(
+        operation_summary="List Popular article images",
+        operation_description="Retrieve all images attached to a specific Popular article.",
+        tags=["Popular Article Images"]
+    )
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Retrieve a Popular article image",
+        operation_description="Get a single Popular article image by ID.",
+        tags=["Popular Article Images"]
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Create a Popular article image",
+        operation_description="Upload a new image to a specific Popular article. Admin only.",
+        tags=["Popular Article Images"]
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Update a Popular article image",
+        operation_description="Replace an image of the Popular article. Admin only.",
+        tags=["Popular Article Images"]
+    )
+    def update(self, request, *args, **kwargs):
+        return super().update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Partially update a Popular article image",
+        operation_description="Update image metadata for Popular article. Admin only.",
+        tags=["Popular Article Images"]
+    )
+    def partial_update(self, request, *args, **kwargs):
+        return super().partial_update(request, *args, **kwargs)
+
+    @swagger_auto_schema(
+        operation_summary="Delete a Popular article image",
+        operation_description="Remove an image from the Popular article. Admin only.",
+        tags=["Popular Article Images"]
     )
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)

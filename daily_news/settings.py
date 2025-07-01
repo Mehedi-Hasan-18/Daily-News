@@ -168,6 +168,9 @@ SIMPLE_JWT = {
 }
 
 DJOSER = {
+    'EMAIL_FRONTEND_PROTOCOL':config('FORNTEND_PROTOCAL'),
+    "EMAIL_FRONTEND_DOMAIN":config('FORNTEND_DOMAIN'),
+    "EMAIL_FRONTEND_SITE_NAME":'Daily News',
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',

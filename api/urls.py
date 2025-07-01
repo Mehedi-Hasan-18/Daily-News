@@ -14,6 +14,10 @@ router.register('popular-articles', PopularArticleViewSet, basename='popular-art
 router.register('categories', CategoryViewSet)
 router.register('authors', AuthorViewSet)
 
+# Category Nested routes
+# category_router = routers.NestedSimpleRouter(router, 'categories', lookup='category')
+# category_router.register('article',ArticleViewSet,basename='article')
+
 # Article nested routes
 article_router = routers.NestedSimpleRouter(router, 'articles', lookup='article')
 article_router.register('images', ArticleImageViewSet, basename='images')

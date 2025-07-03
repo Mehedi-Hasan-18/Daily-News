@@ -13,6 +13,9 @@ class MustReadArticleViewSet(ModelViewSet):
     queryset = MustReadArticle.objects.all()
     serializer_class = MustReadArticleSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend,SearchFilter]
+    filterset_fields = ['category_id']
+    search_fields = ['headline','body','category__name','author__name']
     
     @swagger_auto_schema(
         operation_summary="List Must Read articles",
@@ -66,6 +69,9 @@ class DontMissArticleViewSet(ModelViewSet):
     queryset = DontMissArticle.objects.all()
     serializer_class = DontMissArticleSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend,SearchFilter]
+    filterset_fields = ['category_id']
+    search_fields = ['headline','body','category__name','author__name']
     
     @swagger_auto_schema(
         operation_summary="List Don't Miss articles",
@@ -119,6 +125,9 @@ class PopularArticleViewSet(ModelViewSet):
     queryset = PopularArticle.objects.all()
     serializer_class = PopularArticleSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend,SearchFilter]
+    filterset_fields = ['category_id']
+    search_fields = ['headline','body','category__name','author__name']
     
     @swagger_auto_schema(
         operation_summary="List Popular articles",

@@ -44,7 +44,28 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
-        read_only_fields = ['created_at','updated_at']
+        read_only_fields = ['created_at','updated_at','publishing_date']
+        
+    def update(self, instance, validated_data):
+        category_data = validated_data.pop('category', None)
+        author_data = validated_data.pop('author', None)
+
+        # Update basic fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if category_data:
+            for attr, value in category_data.items():
+                setattr(instance.category, attr, value)
+            instance.category.save()
+
+        if author_data:
+            for attr, value in author_data.items():
+                setattr(instance.author, attr, value)
+            instance.author.save()
+
+        instance.save()
+        return instance
 class MustReadArticleSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     author = AuthorSerializer()
@@ -52,7 +73,28 @@ class MustReadArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = MustReadArticle
         fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
-        read_only_fields = ['created_at','updated_at']
+        read_only_fields = ['created_at','updated_at','publishing_date']
+        
+    def update(self, instance, validated_data):
+        category_data = validated_data.pop('category', None)
+        author_data = validated_data.pop('author', None)
+
+        # Update basic fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if category_data:
+            for attr, value in category_data.items():
+                setattr(instance.category, attr, value)
+            instance.category.save()
+
+        if author_data:
+            for attr, value in author_data.items():
+                setattr(instance.author, attr, value)
+            instance.author.save()
+
+        instance.save()
+        return instance
 class DontMissArticleSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     author = AuthorSerializer()
@@ -60,7 +102,28 @@ class DontMissArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = DontMissArticle
         fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
-        read_only_fields = ['created_at','updated_at']
+        read_only_fields = ['created_at','updated_at','publishing_date']
+        
+    def update(self, instance, validated_data):
+        category_data = validated_data.pop('category', None)
+        author_data = validated_data.pop('author', None)
+
+        # Update basic fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if category_data:
+            for attr, value in category_data.items():
+                setattr(instance.category, attr, value)
+            instance.category.save()
+
+        if author_data:
+            for attr, value in author_data.items():
+                setattr(instance.author, attr, value)
+            instance.author.save()
+
+        instance.save()
+        return instance
 class PopularArticleSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     author = AuthorSerializer()
@@ -68,7 +131,28 @@ class PopularArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = PopularArticle
         fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
-        read_only_fields = ['created_at','updated_at']
+        read_only_fields = ['created_at','updated_at','publishing_date']
+        
+    def update(self, instance, validated_data):
+        category_data = validated_data.pop('category', None)
+        author_data = validated_data.pop('author', None)
+
+        # Update basic fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        if category_data:
+            for attr, value in category_data.items():
+                setattr(instance.category, attr, value)
+            instance.category.save()
+
+        if author_data:
+            for attr, value in author_data.items():
+                setattr(instance.author, attr, value)
+            instance.author.save()
+
+        instance.save()
+        return instance
         
 # --------------Users------------------
     

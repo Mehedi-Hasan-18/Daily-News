@@ -20,7 +20,7 @@ router.register('authors', AuthorViewSet)
 
 # Article nested routes
 article_router = routers.NestedSimpleRouter(router, 'articles', lookup='article')
-article_router.register('images', ArticleImageViewSet, basename='images')
+article_router.register('images', ArticleImageViewSet, basename='article-images')
 article_router.register('ratings', RatingsViewSet, basename='ratings')
 
 # Must Read Article nested routes

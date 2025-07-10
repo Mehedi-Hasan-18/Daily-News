@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter
+from django.shortcuts import get_object_or_404
 
 # --------------------------ArticleViewSet---------------------
 class MustReadArticleViewSet(ModelViewSet):
@@ -417,10 +418,12 @@ class ArticleImageViewSet(ModelViewSet):
     filterset_fields = ['article_id']
     
     def get_queryset(self):
-        return ArticleImage.objects.filter(article_id = self.kwargs.get('article_pk'))
+        return ArticleImage.objects.filter(article_id = self.kwargs.get('article__pk'))
     
     def perform_create(self, serializer):
-        serializer.save(article_id = self.kwargs.get('article_pk'))
+        print("KWARGS:", self.kwargs)
+        article = get_object_or_404(Article, pk=self.kwargs.get("article__pk"))
+        serializer.save(article=article)
         
     @swagger_auto_schema(
         operation_summary="List images of an article",

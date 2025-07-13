@@ -153,7 +153,7 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS =[
-    'http://localhost:5173','https://daily-news-kcck.vercel.app'
+    'http://localhost:5173','https://dailyneeews.netlify.app'
 ]
 
 REST_FRAMEWORK = {

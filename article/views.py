@@ -418,11 +418,11 @@ class ArticleImageViewSet(ModelViewSet):
     filterset_fields = ['article_id']
     
     def get_queryset(self):
-        return ArticleImage.objects.filter(article_id = self.kwargs.get('article__pk'))
+        return ArticleImage.objects.filter(article_id = self.kwargs.get('article_pk'))
     
     def perform_create(self, serializer):
         print("KWARGS:", self.kwargs)
-        article = get_object_or_404(Article, pk=self.kwargs.get("article__pk"))
+        article = get_object_or_404(Article, pk=self.kwargs.get("article_pk"))
         serializer.save(article=article)
         
     @swagger_auto_schema(

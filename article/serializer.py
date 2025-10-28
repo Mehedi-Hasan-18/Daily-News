@@ -98,6 +98,28 @@ class MustReadArticleSerializer(serializers.ModelSerializer):
         model = MustReadArticle
         fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
         read_only_fields = ['created_at','updated_at']
+
+    def create(self, validated_data):
+        category_data = validated_data.pop('category')
+        author_data = validated_data.pop('author')
+
+        try:
+            category = Category.objects.get(name=category_data['name'])
+        except Category.DoesNotExist:
+            raise serializers.ValidationError("Category with this name does not exist.")
+
+        try:
+            author = Author.objects.get(name=author_data['name'])
+        except Author.DoesNotExist:
+            raise serializers.ValidationError("Author with this name does not exist.")
+
+        must_read_article = MustReadArticle.objects.create(
+            category=category,
+            author=author,
+            **validated_data
+        )
+
+        return must_read_article
         
     def update(self, instance, validated_data):
         category_data = validated_data.pop('category', None)
@@ -127,6 +149,28 @@ class DontMissArticleSerializer(serializers.ModelSerializer):
         model = DontMissArticle
         fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
         read_only_fields = ['created_at','updated_at']
+
+    def create(self, validated_data):
+        category_data = validated_data.pop('category')
+        author_data = validated_data.pop('author')
+
+        try:
+            category = Category.objects.get(name=category_data['name'])
+        except Category.DoesNotExist:
+            raise serializers.ValidationError("Category with this name does not exist.")
+
+        try:
+            author = Author.objects.get(name=author_data['name'])
+        except Author.DoesNotExist:
+            raise serializers.ValidationError("Author with this name does not exist.")
+
+        dont_miss_article = DontMissArticle.objects.create(
+            category=category,
+            author=author,
+            **validated_data
+        )
+
+        return dont_miss_article
         
     def update(self, instance, validated_data):
         category_data = validated_data.pop('category', None)
@@ -156,6 +200,28 @@ class PopularArticleSerializer(serializers.ModelSerializer):
         model = PopularArticle
         fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
         read_only_fields = ['created_at','updated_at']
+
+    def create(self, validated_data):
+        category_data = validated_data.pop('category')
+        author_data = validated_data.pop('author')
+
+        try:
+            category = Category.objects.get(name=category_data['name'])
+        except Category.DoesNotExist:
+            raise serializers.ValidationError("Category with this name does not exist.")
+
+        try:
+            author = Author.objects.get(name=author_data['name'])
+        except Author.DoesNotExist:
+            raise serializers.ValidationError("Author with this name does not exist.")
+
+        popular_article = PopularArticle.objects.create(
+            category=category,
+            author=author,
+            **validated_data
+        )
+
+        return popular_article
         
     def update(self, instance, validated_data):
         category_data = validated_data.pop('category', None)

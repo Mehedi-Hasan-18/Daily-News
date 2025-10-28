@@ -3,6 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Article,Category,Author,ArticleImage,Ratings,MustReadArticle,DontMissArticle,PopularArticle,MustReadArticleImage,PopularArticleImage,DontMissArticleImage
 from .serializer import ArticleSerializer,CategorySerializer,AuthorSerializer,ArticleImageSerializer,SimpleUserSerializer,RatingSerializer,MustReadArticleSerializer,DontMissArticleSerializer,PopularArticleSerializer,MustReadArticleImageSerializer,DontMissArticleImageSerializer,PopularArticleImageSerializer
 from .permission import IsAdminOrReadOnly
+from .pagination import ArticlePagination, ImagePagination
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from django_filters.rest_framework import DjangoFilterBackend
@@ -17,6 +18,7 @@ class MustReadArticleViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend,SearchFilter]
     filterset_fields = ['category_id']
     search_fields = ['headline','body','category__name','author__name']
+    pagination_class = ArticlePagination
     
     @swagger_auto_schema(
         operation_summary="List Must Read articles",
@@ -73,6 +75,7 @@ class DontMissArticleViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend,SearchFilter]
     filterset_fields = ['category_id']
     search_fields = ['headline','body','category__name','author__name']
+    pagination_class = ArticlePagination
     
     @swagger_auto_schema(
         operation_summary="List Don't Miss articles",
@@ -129,6 +132,7 @@ class PopularArticleViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend,SearchFilter]
     filterset_fields = ['category_id']
     search_fields = ['headline','body','category__name','author__name']
+    pagination_class = ArticlePagination
     
     @swagger_auto_schema(
         operation_summary="List Popular articles",
@@ -185,6 +189,7 @@ class ArticleViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend,SearchFilter]
     filterset_fields = ['category_id']
     search_fields = ['headline','body','category__name','author__name']
+    pagination_class = ArticlePagination
     
     @swagger_auto_schema(
         operation_summary="List all articles",
@@ -240,6 +245,7 @@ class ArticleViewSet(ModelViewSet):
 class MustReadArticleImageViewSet(ModelViewSet):
     serializer_class = MustReadArticleImageSerializer
     permission_classes = [IsAdminOrReadOnly]
+    pagination_class = ImagePagination  
     
     def get_queryset(self):
         return MustReadArticleImage.objects.filter(article_id=self.kwargs.get('article_pk'))
@@ -298,6 +304,7 @@ class MustReadArticleImageViewSet(ModelViewSet):
 class DontMissArticleImageViewSet(ModelViewSet):
     serializer_class = DontMissArticleImageSerializer
     permission_classes = [IsAdminOrReadOnly]
+    pagination_class = ImagePagination
     
     def get_queryset(self):
         return DontMissArticleImage.objects.filter(article_id=self.kwargs.get('article_pk'))
@@ -356,6 +363,7 @@ class DontMissArticleImageViewSet(ModelViewSet):
 class PopularArticleImageViewSet(ModelViewSet):
     serializer_class = PopularArticleImageSerializer
     permission_classes = [IsAdminOrReadOnly]
+    pagination_class = ImagePagination
     
     def get_queryset(self):
         return PopularArticleImage.objects.filter(article_id=self.kwargs.get('article_pk'))
@@ -416,6 +424,7 @@ class ArticleImageViewSet(ModelViewSet):
     permission_classes = [IsAdminOrReadOnly]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['article_id']
+    pagination_class = ImagePagination
     
     def get_queryset(self):
         return ArticleImage.objects.filter(article_id = self.kwargs.get('article_pk'))

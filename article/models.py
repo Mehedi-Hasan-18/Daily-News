@@ -18,14 +18,22 @@ class Author(models.Model):
         return self.name
 
 class Article(models.Model):
+    TYPE_CHOICES = [
+        ('normal', 'Normal'),
+        ('popular', 'Popular'),
+        ('mustread', 'Must Read'),
+        ('dontmiss', 'Don’t Miss'),
+    ]
+
     headline = models.CharField(max_length=300)
     body = models.TextField()
-    category = models.ForeignKey(Category,on_delete=models.CASCADE, related_name='article')
-    author = models.ForeignKey(Author,on_delete=models.CASCADE,related_name='article')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='article')
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='article')
     publishing_date = models.DateTimeField()
+    types = models.CharField(max_length=20, choices=TYPE_CHOICES, default='normal')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    
+
     def __str__(self):
         return self.headline
     

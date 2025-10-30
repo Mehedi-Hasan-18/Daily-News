@@ -45,7 +45,7 @@ class ArticleSerializer(serializers.ModelSerializer):
     publishing_date = DateTimeField(input_formats=['%Y-%m-%dT%H:%M'])
     class Meta:
         model = Article
-        fields = ['id','headline','body','images','category','author','publishing_date','created_at','updated_at']
+        fields = ['id','headline','body','images','category','types','author','publishing_date','created_at','updated_at']
         read_only_fields = ['created_at','updated_at']
         
     def create(self, validated_data):

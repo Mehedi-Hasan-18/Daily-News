@@ -92,7 +92,12 @@ DATABASES = {
         'USER': config('user'),
         'PASSWORD': config('password'),
         'HOST': config('host'),
-        'PORT': config('port')
+        'PORT': config('port', default='6543'),  # Default to pooler port
+        'CONN_MAX_AGE': 0,
+        'OPTIONS': {
+            'connect_timeout': 10,
+            'sslmode': 'require',
+        }
     }
 }
 
